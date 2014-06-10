@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         if current_user
           me = User.find(current_user)
-          if me.role == "admin"
+          if can? :manage, @user
             @user.update(params.require(:user).permit(:role))
           end
         end
