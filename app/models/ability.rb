@@ -7,8 +7,16 @@ class Ability
      user ||= User.new # guest user (not logged in)
      if user.role == "admin"
        can :manage, :all
+       cannot [:change_roles, :delete], User, id: user.id
+       can :delete, Type, posts: []
+       cannot [:create, :update], Post
+     elsif user.role == "user"
+       can :manage, User, id: user.id
+       cannot :change_roles, User
+       can :read, [Post, User]
+       can :manage, Post, user_id: user.id
      else
-       can :read, :all
+       can :read, Post
      end
 
     # The first argument to `can` is the action you are giving the user 
@@ -29,4 +37,5 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
+
 end

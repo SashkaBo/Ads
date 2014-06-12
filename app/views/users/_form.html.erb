@@ -2,7 +2,7 @@
   <%= f.input :name %>
   <%= f.input :email %>
   <%= f.input :sex, :as => :radio_buttons %>
-  <%= f.input :role, :as => :radio_buttons %>
+  <%= f.input :role, :as => :radio_buttons if can? :change_roles, @user %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

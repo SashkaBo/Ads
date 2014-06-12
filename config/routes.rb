@@ -1,4 +1,6 @@
 Ads::Application.routes.draw do
+  resources :types
+
   devise_for :users
   resources :posts
 

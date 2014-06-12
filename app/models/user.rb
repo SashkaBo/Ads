@@ -14,8 +14,9 @@ class User < ActiveRecord::Base
   #, default: lambda { |user| SexIdentifier.sex_for_name(user.name).to_sym }
   enumerize :role, in: [:user, :admin], default: :user
 
-  def default_values
-    self.name ||= 'noname'
-  end
+  private
+    def default_values
+      self.name ||= 'noname'
+    end
 
 end
