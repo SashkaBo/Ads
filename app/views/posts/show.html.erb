@@ -10,6 +10,8 @@
   <dd><%= @post.content %></dd>
   <dt><strong><%= model_class.human_attribute_name(:type_id) %>:</strong></dt>
   <dd><%= @post.type.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
+  <dd><%= image_tag @post.image.url(:medium) %></dd>
 </dl>
 
 <div class="form-actions">
