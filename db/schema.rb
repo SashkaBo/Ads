@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610174037) do
+ActiveRecord::Schema.define(version: 20140612202113) do
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140610174037) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "type_id"
-    t.string   "life_circle"
+    t.string   "status"
   end
 
   create_table "types", force: true do |t|

@@ -4,8 +4,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :type
 
-  LIFE_CIRCLE = %w[draft new rejected approved posted]
+  STATUS = %w[draft new rejected approved posted]
 
-  enumerize :life_circle, in: LIFE_CIRCLE, default: :draft
+  enumerize :status, in: STATUS, default: :draft
 
 end

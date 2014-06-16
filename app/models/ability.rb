@@ -10,11 +10,15 @@ class Ability
        cannot [:change_roles, :delete], User, id: user.id
        can :delete, Type, posts: []
        cannot [:create, :update], Post
+       cannot :read, Post, status: "draft"
      elsif user.role == "user"
        can :manage, User, id: user.id
        cannot :change_roles, User
        can :read, [Post, User]
        can :manage, Post, user_id: user.id
+       cannot :read, Post do |post|
+         post.status == "draft" && post.user_id != user.id
+       end
      else
        can :read, Post
      end
