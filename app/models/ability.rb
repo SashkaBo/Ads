@@ -14,11 +14,9 @@ class Ability
      elsif user.role == "user"
        can :manage, User, id: user.id
        cannot :change_roles, User
-       can :read, [Post, User]
+       can :read, User
+       can :read, Post, status: "publish"
        can :manage, Post, user_id: user.id
-       cannot :read, Post do |post|
-         post.status == "draft" && post.user_id != user.id
-       end
      else
        can :read, Post
      end

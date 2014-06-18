@@ -25,6 +25,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.to_new! if params[:post][:publish] == '1'
     current_user.posts << @post
 
     respond_to do |format|
@@ -70,6 +71,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :type_id, :image)
+      params.require(:post).permit(:content, :type_id, :image, :status)
     end
 end

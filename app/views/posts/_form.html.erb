@@ -2,6 +2,7 @@
   <%= f.input :content %>
   <%= f.association :type, label_method: :name, value_method: :id, include_blank: false %>
   <%= f.file_field :image %>
+  <%= f.check_box :publish %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
