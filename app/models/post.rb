@@ -22,7 +22,7 @@ class Post < ActiveRecord::Base
     end
 
     event :to_draft do
-      transition :reject => :daft
+      transition :reject => :draft
     end
 
     event :publish do
