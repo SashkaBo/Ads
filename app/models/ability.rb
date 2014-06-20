@@ -3,22 +3,28 @@ class Ability
 
   def initialize(user)
     # Define abilities for the passed in user here. For example:
-
      user ||= User.new # guest user (not logged in)
-     if user.role == "admin"
-       can :manage, :all
-       cannot [:change_roles, :delete], User, id: user.id
-       can :delete, Type, posts: []
-       cannot [:create, :update], Post
-       cannot :read, Post, status: "draft"
-     elsif user.role == "user"
-       can :manage, User, id: user.id
-       cannot :change_roles, User
-       can :read, User
-       can :read, Post, status: "publish"
-       can :manage, Post, user_id: user.id
+     if user.persisted?
+       if user.role == "admin"
+         can :manage, :all
+         cannot [:change_roles, :delete], User, id: user.id
+         can :delete, Type, posts: []
+         cannot [:create, :update], Post
+         cannot :read, Post, status: "draft"
+       elsif user.role == "user"
+         can :manage, User, id: user.id
+         cannot :change_roles, User
+         can :read, User
+         can :read, Post, status: "publish"
+         can :manage, Post, user_id: user.id
+         cannot :update, Post do |post|
+           post.status != "draft"
+         end
+       end
      else
-       can :read, Post
+       can :read, Post do |post|
+         post.status == "publish"
+       end
      end
 
     # The first argument to `can` is the action you are giving the user 

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :change_status]
   before_filter :authenticate_user!, except: [:show, :index]
   # GET /posts
   # GET /posts.json
@@ -61,6 +61,20 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  def change_status
+    case params[:status]
+      when "new"
+        @post.to_new!
+      when "reject"
+        @post.reject!
+      when "approve"
+        @post.approve!
+      when "draft"
+        @post.to_draft!
+    end
+    redirect_to posts_path
   end
 
   private

@@ -8,6 +8,8 @@ Ads::Application.routes.draw do
 
   root to: "posts#index"
 
+  get 'post/:id/change_status' => 'posts#change_status', as: :change_status
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -15,7 +15,7 @@
   </thead>
   <tbody>
     <% @posts.each do |post| %>
-      <% if can? :read, post%>
+      <% if can? :read, post %>
         <tr>
           <td><%= link_to User.find(post.user_id).name, user_path(post.user_id) %></td>
           <td><%= link_to post.content, post_path(post) %></td>
@@ -30,6 +30,9 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' if can? :delete, post %>
+            <% post.get_possible_statuses(current_user).each do |st| %>
+                <%= link_to st, change_status_path(post, status: st) %>
+            <% end %>
           </td>
         </tr>
       <% end %>
