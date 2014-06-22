@@ -52,3 +52,4 @@ gem 'cancan'
 gem 'pry'
 gem 'paperclip'
 gem 'state_machine'
+gem 'whenever', :require => false
