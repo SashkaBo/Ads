@@ -53,3 +53,10 @@ gem 'pry'
 gem 'paperclip'
 gem 'state_machine'
 gem 'whenever', :require => false
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
+gem 'factory_girl_rails'
+gem 'faker'
