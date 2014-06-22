@@ -33,18 +33,18 @@ class Post < ActiveRecord::Base
 
   def get_possible_statuses(current_user)
     possible_statuses = []
-    if current_user
-      if current_user.role.user?
-        case status
-          when 'draft'
-            possible_statuses = [:new]
-          when 'reject'
-            possible_statuses = [:draft]
-        end
-      elsif current_user.role.admin?
-        possible_statuses = [:approve, :reject] if status == 'new'
+
+    if current_user.role.user?
+      case status
+        when 'draft'
+          possible_statuses = [:new]
+        when 'reject'
+          possible_statuses = [:draft]
       end
+    elsif current_user.role.admin?
+      possible_statuses = [:approve, :reject] if status == 'new'
     end
+
     possible_statuses
   end
 
